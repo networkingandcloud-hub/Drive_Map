@@ -1,0 +1,133 @@
+Drive Mapping Using Group Policy
+Requirement
+
+Active Directory Domain Services
+
+Shared folder created on server
+
+Proper share and NTFS permissions
+
+Client machine joined to domain
+
+Example Used
+Shared Folder Path: \\SERVERNAME\SharedData
+Drive Letter: Z:
+
+PART 1: Verify Shared Folder
+
+Ensure shared folder is accessible
+
+Test access:
+
+\\SERVERNAME\SharedData
+
+PART 2: Create Group Policy Object (GPO)
+Step 1: Open Group Policy Management
+
+Login to Domain Controller
+
+Open Server Manager
+
+Click Tools
+
+Select Group Policy Management
+
+Step 2: Create New GPO
+
+Right-click Domain or OU
+
+Click Create a GPO in this domain, and Link it here
+
+GPO Name:
+
+Drive Mapping Policy
+
+
+Click OK
+
+PART 3: Configure Drive Mapping
+Step 1: Edit GPO
+
+Right-click Drive Mapping Policy
+
+Click Edit
+
+Step 2: Navigate Policy Path
+User Configuration
+→ Preferences
+→ Windows Settings
+→ Drive Maps
+
+Step 3: Create New Drive Map
+
+Right-click Drive Maps
+
+Click New → Mapped Drive
+
+Step 4: Configure Drive Map
+
+Action: Create
+
+Location:
+
+\\SERVERNAME\SharedData
+
+
+Drive Letter:
+
+Z:
+
+
+Label as:
+
+Shared Drive
+
+
+Click OK
+
+PART 4: Link GPO to Correct OU
+
+Ensure GPO is linked to OU where users are located
+
+If not, drag or link the GPO to correct OU
+
+PART 5: Apply Group Policy on Client
+Step 1: Update Policy
+
+Login to client machine
+
+Open Command Prompt
+
+Run:
+
+gpupdate /force
+
+Step 2: Logoff / Restart
+
+Logoff and login again
+
+Verification
+
+Open This PC
+
+Confirm mapped drive:
+
+Z: Shared Drive
+
+Common Issues & Fix
+
+Drive not visible:
+
+Check DNS settings
+
+Check permissions
+
+Check GPO linked to correct OU
+
+Access denied:
+
+Check Share and NTFS permissions
+
+Conclusion
+
+Drive mapping has been successfully configured using Group Policy in Active Directory.
